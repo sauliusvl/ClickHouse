@@ -292,7 +292,6 @@ void QueryPipeline::setSinks(const ProcessorGetterWithStreamKind & getter)
             transform = std::make_shared<NullSink>(stream->getHeader());
 
         connect(*stream, transform->getInputs().front());
-        stream = &transform->getOutputs().front();
         processors.emplace_back(std::move(transform));
     };
 
