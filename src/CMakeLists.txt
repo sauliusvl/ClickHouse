@@ -305,6 +305,11 @@ if (ZSTD_LIBRARY)
     endif ()
 endif()
 
+if (USE_LIBURING)
+    target_link_libraries (clickhouse_common_io PUBLIC ${LIBURING_LIBRARY})
+    target_include_directories (clickhouse_common_io SYSTEM BEFORE PUBLIC ${LIBURING_COMPAT_INCLUDE_DIR} ${LIBURING_INCLUDE_DIR})
+endif()
+
 if (USE_ICU)
     dbms_target_link_libraries (PRIVATE ${ICU_LIBRARIES})
     dbms_target_include_directories (SYSTEM PRIVATE ${ICU_INCLUDE_DIRS})

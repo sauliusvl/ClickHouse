@@ -305,5 +305,8 @@ if (USE_SENTRY)
     add_subdirectory (sentry-native)
 endif()
 
-add_subdirectory (fmtlib-cmake)
+if (USE_LIBURING)
+    add_subdirectory (liburing-cmake)
+endif()
 
+add_subdirectory (fmtlib-cmake)

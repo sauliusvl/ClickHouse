@@ -174,3 +174,6 @@
 [submodule "contrib/sentry-native"]
 	path = contrib/sentry-native
 	url = https://github.com/getsentry/sentry-native.git
+[submodule "contrib/liburing"]
+	path = contrib/liburing
+	url = https://github.com/axboe/liburing.git
