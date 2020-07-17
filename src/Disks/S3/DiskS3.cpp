@@ -533,7 +533,7 @@ void DiskS3::copyFile(const String & from_path, const String & to_path)
     to.save();
 }
 
-std::unique_ptr<ReadBufferFromFileBase> DiskS3::readFile(const String & path, size_t buf_size, size_t, size_t, size_t) const
+std::unique_ptr<ReadBufferFromFileBase> DiskS3::readFile(const String & path, size_t buf_size, size_t, bool, size_t, size_t) const
 {
     Metadata metadata(s3_root_path, metadata_path, path);
 

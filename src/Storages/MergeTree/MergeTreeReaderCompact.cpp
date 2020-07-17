@@ -72,7 +72,7 @@ MergeTreeReaderCompact::MergeTreeReaderCompact(
         auto buffer =
             std::make_unique<CompressedReadBufferFromFile>(
                 data_part->volume->getDisk()->readFile(
-                    full_data_path, buffer_size, 0, settings.min_bytes_to_use_direct_io, settings.min_bytes_to_use_mmap_io));
+                    full_data_path, buffer_size, 0, settings.use_io_uring, settings.min_bytes_to_use_direct_io, settings.min_bytes_to_use_mmap_io));
 
         if (profile_callback_)
             buffer->setProfileCallback(profile_callback_, clock_type_);

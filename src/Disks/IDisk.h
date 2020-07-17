@@ -136,6 +136,7 @@ public:
         const String & path,
         size_t buf_size = DBMS_DEFAULT_BUFFER_SIZE,
         size_t estimated_size = 0,
+        bool use_io_uring = false,
         size_t aio_threshold = 0,
         size_t mmap_threshold = 0) const = 0;
 

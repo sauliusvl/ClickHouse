@@ -220,9 +220,9 @@ void DiskLocal::copyFile(const String & from_path, const String & to_path)
 }
 
 std::unique_ptr<ReadBufferFromFileBase>
-DiskLocal::readFile(const String & path, size_t buf_size, size_t estimated_size, size_t aio_threshold, size_t mmap_threshold) const
+DiskLocal::readFile(const String & path, size_t buf_size, size_t estimated_size, bool use_io_uring, size_t aio_threshold, size_t mmap_threshold) const
 {
-    return createReadBufferFromFileBase(disk_path + path, estimated_size, aio_threshold, mmap_threshold, buf_size);
+    return createReadBufferFromFileBase(disk_path + path, estimated_size, use_io_uring, aio_threshold, mmap_threshold, buf_size);
 }
 
 std::unique_ptr<WriteBufferFromFileBase>

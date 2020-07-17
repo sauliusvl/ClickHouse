@@ -101,7 +101,7 @@ MergeTreeReaderStream::MergeTreeReaderStream(
     {
         auto buffer = std::make_unique<CompressedReadBufferFromFile>(
             disk->readFile(path_prefix + data_file_extension, buffer_size,
-                sum_mark_range_bytes, settings.min_bytes_to_use_direct_io, settings.min_bytes_to_use_mmap_io)
+                sum_mark_range_bytes, settings.use_io_uring, settings.min_bytes_to_use_direct_io, settings.min_bytes_to_use_mmap_io)
         );
 
         if (profile_callback)

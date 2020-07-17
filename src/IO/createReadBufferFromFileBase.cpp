@@ -21,7 +21,7 @@ namespace DB
 
 std::unique_ptr<ReadBufferFromFileBase> createReadBufferFromFileBase(
     const std::string & filename_,
-    size_t estimated_size, size_t aio_threshold, size_t mmap_threshold,
+    size_t estimated_size, bool use_io_uring, size_t aio_threshold, size_t mmap_threshold,
     size_t buffer_size_, int flags_, char * existing_memory_, size_t alignment)
 {
 #if defined(OS_LINUX) || defined(__FreeBSD__)
@@ -59,6 +59,12 @@ std::unique_ptr<ReadBufferFromFileBase> createReadBufferFromFileBase(
             ProfileEvents::increment(ProfileEvents::CreatedReadBufferMMapFailed);
         }
     }
+
+#if defined(__linux__)
+    (void)use_io_uring;
+#else
+    (void)use_io_uring;
+#endif
 
     ProfileEvents::increment(ProfileEvents::CreatedReadBufferOrdinary);
     return std::make_unique<ReadBufferFromFile>(filename_, buffer_size_, flags_, existing_memory_, alignment);

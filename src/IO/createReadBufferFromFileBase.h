@@ -18,6 +18,7 @@ namespace DB
 std::unique_ptr<ReadBufferFromFileBase> createReadBufferFromFileBase(
     const std::string & filename_,
     size_t estimated_size,
+    bool use_io_uring,
     size_t aio_threshold,
     size_t mmap_threshold,
     size_t buffer_size_ = DBMS_DEFAULT_BUFFER_SIZE,

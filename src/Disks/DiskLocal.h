@@ -77,6 +77,7 @@ public:
         const String & path,
         size_t buf_size,
         size_t estimated_size,
+        bool use_io_uring,
         size_t aio_threshold,
         size_t mmap_threshold) const override;
 

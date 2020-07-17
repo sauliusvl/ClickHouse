@@ -546,6 +546,7 @@ Pipes MergeTreeDataSelectExecutor::readFromParts(
 
     MergeTreeReaderSettings reader_settings =
     {
+        .use_io_uring = settings.use_io_uring,
         .min_bytes_to_use_direct_io = settings.min_bytes_to_use_direct_io,
         .min_bytes_to_use_mmap_io = settings.min_bytes_to_use_mmap_io,
         .max_read_buffer_size = settings.max_read_buffer_size,
