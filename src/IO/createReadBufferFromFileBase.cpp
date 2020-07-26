@@ -3,6 +3,9 @@
 #if defined(OS_LINUX) || defined(__FreeBSD__)
 #include <IO/ReadBufferAIO.h>
 #endif
+#if defined(__linux__)
+#include <IO/ReadBufferIOUring.h>
+#endif
 #include <IO/MMapReadBufferFromFile.h>
 #include <Common/ProfileEvents.h>
 
@@ -61,7 +64,10 @@ std::unique_ptr<ReadBufferFromFileBase> createReadBufferFromFileBase(
     }
 
 #if defined(__linux__)
-    (void)use_io_uring;
+    if (use_io_uring) {
+        auto res = std::make_unique<ReadBufferIOUring>(filename_, buffer_size_, flags_, existing_memory_);
+        return res;
+    }
 #else
     (void)use_io_uring;
 #endif
